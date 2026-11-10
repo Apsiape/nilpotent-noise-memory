@@ -29,6 +29,8 @@
 \newtheorem*{mainB}{Theorem B}
 \newtheorem*{mainC}{Theorem C}
 \newtheorem*{mainD}{Theorem D}
+\newtheorem*{mainE}{Theorem E}
+\newtheorem*{mainF}{Theorem F}
 \newcommand{\Z}{\mathbb Z}
 \newcommand{\N}{\mathbb N}
 \newcommand{\Prob}{\mathbb P}
@@ -41,7 +43,7 @@
 \hypersetup{pdftitle={A nilpotent cellular automaton that remembers under noise},pdfauthor={Seth Douglas and Nidhal Mghirbi}}
 \title{\vspace{-1.2cm}\LARGE A nilpotent cellular automaton\\ that remembers under noise}
 \author{Seth Douglas \and Nidhal Mghirbi}
-\date{\small Version 1.1.0, November 2026}
+\date{\small Version 1.2.0, November 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
@@ -49,6 +51,8 @@
 Does every positive zero-range perturbation of a nilpotent cellular automaton have a unique attracting stationary law? We construct a counterexample on $\Z^3$, answering a question of Marcovici, Sablik and Taati. Each site carries a bit and a bounded countdown. The deterministic rule reaches the all-zero configuration after a fixed number of steps, while independent uniform replacements renew the countdowns and allow a horizontal bit plane to retain its initial value. With stationary countdowns, the plane is exactly a north-east-centre majority process with independent gates and independent replacement faults. We calculate the gate law and apply Toom's stability theorem in the quantitative version of G\'acs to obtain two translation-invariant stationary laws. For the same fixed automaton, a dependency-path estimate proves uniform exponential ergodicity at sufficiently small and sufficiently large noise rates. We also construct, for every prescribed separation, a nilpotent automaton, a set of replacement events at pairwise distance exceeding that separation, and two initial configurations whose bits differ on a whole plane at all times under those common events.
 
 The countdown also lifts other rules. Applied to the computable family of positive-rate automata on $\Z^8$ whose ergodicity at a fixed noise rate is undecidable (Douglas and Mghirbi, \emph{Forgetting under noise is undecidable}), it gives a computable family of radius-one cellular automata on $\Z^9$, all nilpotent within the same number of steps, with alphabets that grow with the machine. At every rate in $[\eps_0/2,\eps_0]$, where $\eps_0=490000^{-99}$, uniform replacement noise makes the member built from a Turing machine $M$ ergodic if and only if $M$ halts. For every $n$, we also construct one nilpotent automaton on $\Z^3$ with $n$ disjoint intervals of noise rates that carry two translation-invariant stationary laws, alternating with intervals of uniform exponential ergodicity. Whether a single nilpotent rule can have infinitely many such windows is open.
+
+Erasure in two steps already suffices, while erasure in one step forces ergodicity under every zero-range noise. We give a four-symbol cellular automaton $F$ on $\Z^3$ with $F\circ F$ constant whose uniform replacement perturbation has two translation-invariant stationary laws at every rate in $[2^{-44},2^{-42}]$ and is uniformly exponentially ergodic at sufficiently small and sufficiently large rates. Each site reads a seed, the word of $2^{51}$ auxiliary symbols above it, which every deterministic update resets to zero. Exact rational seed partitions give a compiler: for fixed rationals $0<\eps<2\rho$, it maps every attractive binary probabilistic cellular automaton on $\Z^d$ with rational transition probabilities in $[\rho,1-\rho]$ computably to a cellular automaton on $\Z^{d+1}$, nilpotent in two steps, whose uniform replacement perturbation at rate $\eps$ is ergodic, uniformly exponentially ergodic or has two translation-invariant stationary laws exactly when the original automaton has that property.
 \end{abstract}
 \begin{center}\small AI systems assisted with this work; see ``How this work was done.''\end{center}
 
@@ -77,6 +81,16 @@ This is \cref{thm:nu-main}, which also gives explicit ergodic ranges at small an
 For every $n\geq1$, there is a radius-one nilpotent cellular automaton on $\Z^3$ whose uniform replacement perturbation has two translation-invariant stationary laws at every rate in $n$ disjoint open intervals, separated in order by $n-1$ open intervals of uniform exponential ergodicity. It is also uniformly exponentially ergodic at all sufficiently small and all sufficiently large positive rates.
 \end{mainD}
 This is \cref{thm:nu-windows}. For every $n$ it gives a nilpotent automaton whose ergodicity changes at least $2n$ times as the noise rate varies, which bears on the question of Marsan, Sablik and T\"orm\"a \cite{MST26} of which sets of noise rates can occur as ergodicity sets; it does not determine the status between the stated intervals. Whether one nilpotent rule can have infinitely many such windows is open (\cref{rem:nu-infinite}).
+
+These rules erase a configuration only after a long countdown; the rule of Theorem~A needs $2^{88}+1$ steps. A rule that erases everything in one step is ergodic under every zero-range noise, since after one noisy step the configuration has a fixed product law (\cref{prop:one-step}). Two steps suffice.
+\begin{mainE}
+There is a cellular automaton $F$ on $\Z^3$ with four symbols such that $F\circ F$ is constant and whose uniform replacement perturbation has two translation-invariant stationary laws at every rate in $[2^{-44},2^{-42}]$. The same rule is uniformly exponentially ergodic at every rate in $(0,1/(3\cdot2^{50}))$ and in $(2/3,1]$.
+\end{mainE}
+This is \cref{thm:two-step}. Each site reads a seed, the word of $2^{51}$ auxiliary symbols above it, and every deterministic update resets the auxiliary symbols to zero; the radius of the rule is therefore $2^{51}$. Theorems~A and~E trade nilpotency time against radius. Exact rational bins for the seed turn this mechanism into a compiler.
+\begin{mainF}
+Fix $d\geq1$ and rationals $0<\eps<2\rho\leq1$. There is a total computable map $P\mapsto F_P$ from attractive binary probabilistic cellular automata on $\Z^d$ with rational transition probabilities in $[\rho,1-\rho]$ to cellular automata on $\Z^{d+1}$ with $F_P\circ F_P$ constant, with the following property. Uniform replacement at rate $\eps$ after $F_P$ is ergodic, is uniformly exponentially ergodic, or has two translation-invariant stationary laws, if and only if $P$ has the same property.
+\end{mainF}
+This is \cref{thm:compiler}, and every horizontal plane of the compiled system runs $P$ exactly from time $1$ (\cref{thm:compiler}(ii)). The rate and the dimension are fixed before $P$ is given; the alphabet and the radius depend on $P$. Compiling noisy north-east-centre majority gives a second two-step example, whose planes are exactly the noisy majority process (\cref{cor:compiled-toom}). The same compiler, applied to a prescribed law of local maps, turns the family of \cite{DM26A} into a family on $\Z^9$, nilpotent in two steps, whose ergodicity at one rate is equivalent to halting (\cref{rem:two-step-halting}). That family is incomparable with Theorem~C: it is nilpotent in two steps, but it loses radius one and the interval of rates.
 
 \begin{figure}[t]
 \centering
@@ -113,7 +127,7 @@ Marsan, Sablik and T\"orm\"a already established the phenomenon of ergodicity at
 
 \begin{table}[t]
 \centering\small
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.27\textwidth} X p{0.18\textwidth}@{}}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{0.27\textwidth} X >{\raggedright\arraybackslash}p{0.18\textwidth}@{}}
 \toprule
 Result & Behavior under noise & Deterministic rule\\
 \midrule
@@ -121,15 +135,16 @@ Marcovici--Sablik--Taati \cite{MST19} & Ergodicity under all sufficiently small 
 Marsan--Sablik--T\"orm\"a \cite{MST26} & One-dimensional example with ergodicity at low and high noise, and non-ergodicity between. & Cyclic clock\\[4pt]
 Douglas--Mghirbi \cite{DM26A} & Computable family on $\Z^8$ whose ergodicity at each fixed small rate is equivalent to halting. & Quorum rule\\[4pt]
 This paper, Theorems~A and~D & Three-dimensional example with the same three regimes under uniform replacement noise; for each $n$, an example with $n$ separated non-ergodic windows. & Nilpotent\\[4pt]
-This paper, Theorem~C & Computable family on $\Z^9$ whose ergodicity at each rate of a fixed interval is equivalent to halting. & Nilpotent\\
+This paper, Theorem~C & Computable family on $\Z^9$ whose ergodicity at each rate of a fixed interval is equivalent to halting. & Nilpotent\\[4pt]
+This paper, Theorems~E and~F & Four-symbol example on $\Z^3$ with two translation-invariant stationary laws on an interval of rates; exact transfer of ergodicity, exponential ergodicity and coexistence from attractive binary PCA in one more dimension. & Two-step nilpotent\\
 \bottomrule
 \end{tabularx}
-\caption{The nilpotent question, the earlier two-transition phenomenon and undecidable ergodicity at a fixed rate.}
+\caption{The nilpotent question, the earlier two-transition phenomenon, undecidable ergodicity at a fixed rate and the least nilpotency time.}
 \label{tab:landscape}
 \end{table}
 
 \paragraph{Reading guide.}
-\Cref{sec:rule,sec:clocks} define the model and derive its independent gates. \Cref{sec:memory} imports the majority-stability estimate and proves coexistence of stationary laws. \Cref{sec:ergodicity} gives the coupling proof for the two ergodic regimes. \Cref{sec:nu-undecidable} lifts the undecidable family of \cite{DM26A} to a uniformly nilpotent family on $\Z^9$, and \cref{sec:nu-many-windows} gives, for each $n$, a nilpotent rule with $n$ separated memory windows. \Cref{sec:deterministic} proves the separated-event statement directly. The non-elementary inputs are Toom's stability theorem in the stated quantitative form and, in \cref{sec:nu-undecidable} only, the machine-to-tiling compiler, the three-token theorem and the Common local maps lemma of \cite{DM26A}.
+\Cref{sec:rule,sec:clocks} define the model and derive its independent gates. \Cref{sec:memory} imports the majority-stability estimate and proves coexistence of stationary laws. \Cref{sec:ergodicity} gives the coupling proof for the two ergodic regimes. \Cref{sec:nu-undecidable} lifts the undecidable family of \cite{DM26A} to a uniformly nilpotent family on $\Z^9$, and \cref{sec:nu-many-windows} gives, for each $n$, a nilpotent rule with $n$ separated memory windows. \Cref{sec:deterministic} proves the separated-event statement directly. \Cref{sec:two-step} shows that one deterministic step never suffices and two do: it proves Theorem~E for a four-symbol seeded rule and gives the seed compiler of Theorem~F. The non-elementary inputs are Toom's stability theorem in the stated quantitative form and, in \cref{sec:nu-undecidable} and \cref{rem:two-step-halting} only, the machine-to-tiling compiler, the three-token theorem and the Common local maps lemma of \cite{DM26A}.
 
 \section{The rule and the noise}\label{sec:rule}
 
@@ -270,7 +285,7 @@ Let a binary process on $\Z^2$, started from the constant bit $a\in\{0,1\}$, be 
 then at every site and time its probability of disagreeing with $a$ is at most $96\rho$.
 \end{theorem}
 
-This is the infinite-plane case $m=\infty$ of the main theorem of \cite{Gacs21},\footnote{In the displayed perturbation condition of \cite{Gacs21}, the comparison with the prescribed output is printed as equality. We use the disagreement event specified by its subsequent definition of $\mathrm{Noise}$ and its proof.} specialized as follows. Take the auxiliary one-dimensional space in its Definition~1.5 to be a singleton and its transition rule to be the identity. The resulting three-dimensional rule is exactly NEC majority on the remaining two coordinates. The constant reference trajectory is $a$ at every site and time. The constants stated there are $r=24$, threshold $(32r^8)^{-1}$, and error bound $4r\rho$. Independent site updates with the displayed conditional error bound satisfy its perturbation hypothesis, including conditioning on the other simultaneous outputs. Outside \cref{sec:nu-undecidable}, this is the sole imported estimate; Toom's original theorem is \cite{Toom80}. A one-point auxiliary space is admitted by the definitions of \cite{Gacs21}; the neighbours $n\pm1$ then coincide with $n$, and its perturbation condition is read for the three-dimensional rule as in the theorem.
+This is the infinite-plane case $m=\infty$ of the main theorem of \cite{Gacs21},\footnote{In the displayed perturbation condition of \cite{Gacs21}, the comparison with the prescribed output is printed as equality. We use the disagreement event specified by its subsequent definition of $\mathrm{Noise}$ and its proof.} specialized as follows. Take the auxiliary one-dimensional space in its Definition~1.5 to be a singleton and its transition rule to be the identity. The resulting three-dimensional rule is exactly NEC majority on the remaining two coordinates. The constant reference trajectory is $a$ at every site and time. The constants stated there are $r=24$, threshold $(32r^8)^{-1}$, and error bound $4r\rho$. Independent site updates with the displayed conditional error bound satisfy its perturbation hypothesis, including conditioning on the other simultaneous outputs. Outside \cref{sec:nu-undecidable} and \cref{rem:two-step-halting}, this is the sole imported estimate; Toom's original theorem is \cite{Toom80}. A one-point auxiliary space is admitted by the definitions of \cite{Gacs21}; the neighbours $n\pm1$ then coincide with $n$, and its perturbation condition is read for the three-dimensional rule as in the theorem.
 
 \begin{theorem}\label{thm:coexistence}
 If $p_H(\eps)<\tau$, then $P_{H,\eps}$ has two translation-invariant stationary laws $\mu^0,\mu^1$ satisfying, at every site $v\in\Z^3$,
@@ -645,6 +660,277 @@ The bits at $z=0$ are never replaced and read bits only in that plane. They cons
 
 The separation parameter is fixed before the automaton is chosen. Thus the theorem provides arbitrarily well separated renewal events across the family of nilpotent rules. Their positions in the extra spatial coordinate keep the renewals separated while feeding every gate of the same bit plane.
 
+\section{Nilpotency in two steps}\label{sec:two-step}
+
+The rules of the preceding sections erase a configuration only after a long countdown; the rule of \cref{thm:coexistence} needs $2^{88}+1$ steps. The least nilpotency time that permits a negative answer to the question of \cite{MST19} is two.
+
+\begin{proposition}[One step forces ergodicity]\label{prop:one-step}
+Let $F$ be a cellular automaton whose image is a single configuration. Every perturbation of $F$ by zero-range noise has, after one step and from every initial law, one and the same product law. This law is its unique stationary law.
+\end{proposition}
+\begin{proof}
+The image configuration is invariant under translations, since $F$ commutes with them, so it is uniform with some symbol $c$. A zero-range perturbation applies $F$ and then, independently at every site, one fixed stochastic matrix $\theta$ to the resulting symbol \cite{MST19}. After one step the configuration therefore has the product law with one-site marginal $\theta(c,\cdot)$, whatever the initial law. This law is stationary, and every stationary law equals it.
+\end{proof}
+
+Two steps suffice. In place of a countdown, each site reads a \emph{seed}: the word formed by the auxiliary symbols at the $m$ sites above it. Every deterministic update resets the auxiliary symbols to zero. After one step every seed is therefore the zero word, and the second step writes the data symbol attached to that word at every site. Under noise, replacements write new auxiliary symbols at every step, and the seed read by a plane is randomness that the plane has not used before. As in \cref{sec:nu-undecidable}, the extra coordinate supplies this randomness.
+
+\subsection{Seeded rules}
+
+\begin{definition}[Seeded rule]\label{def:seeded}
+Let $\mathcal B$ be a finite alphabet and $N\subset\Z^d$ a finite nonempty set. Let $g_1,\ldots,g_B$ be maps from $\mathcal B^N$ to $\mathcal B$, of which $g_1$ is constant with value $s_0$. Let $S\geq2$ and $m\geq1$ be integers, and let $J\colon\{0,\ldots,S-1\}^m\to\{1,\ldots,B\}$ send the zero word to $1$. The \emph{seeded rule} with these data is the cellular automaton $F$ on $\Z^d\times\Z$ with alphabet $\mathcal B\times\{0,\ldots,S-1\}$ given, for a configuration $(b,y)$ and a site $(u,z)$, by
+\begin{align}
+ (Fy)(u,z)&=0,\label{eq:seed-y}\\
+ (Fb)(u,z)&=g_{J(W(u,z))}\bigl((b(u+n,z))_{n\in N}\bigr),\label{eq:seed-b}
+\end{align}
+where $W(u,z)=(y(u,z+1),\ldots,y(u,z+m))$ is the \emph{seed} of $(u,z)$. The sets $J^{-1}(i)$ are the \emph{bins}.
+\end{definition}
+
+The neighbourhood of $F$ consists of $N\times\{0\}$ and the sites $(0,j)$ with $1\leq j\leq m$. Its uniform replacement perturbation $\Phi_\eps$ at rate $0<\eps\leq1$ is defined as in \cref{sec:rule}. At every site $v$ and time $t\geq1$ there are independent variables $R_t(v)\sim\operatorname{Bernoulli}(\eps)$, $V_t(v)$ uniform on $\mathcal B$ and $Y_t(v)$ uniform on $\{0,\ldots,S-1\}$. If $R_t(v)=1$, the symbol $(V_t(v),Y_t(v))$ is written at $v$; otherwise $F$ is applied there. Put
+\begin{equation}\label{eq:seed-q}
+ q_\eps(0)=1-\eps+\frac{\eps}{S},\qquad q_\eps(s)=\frac{\eps}{S}\quad(1\leq s<S),\qquad
+ \pi_i(\eps)=q_\eps^{\otimes m}\bigl(J^{-1}(i)\bigr).
+\end{equation}
+Write $\langle s\rangle$ for the constant map with value $s$, and let
+\[
+ \Lambda_\eps=\frac{\eps}{|\mathcal B|}\sum_{s\in\mathcal B}\delta_{\langle s\rangle}
+ +(1-\eps)\sum_{i=1}^B\pi_i(\eps)\,\delta_{g_i},
+\]
+a law on maps $\mathcal B^N\to\mathcal B$.
+
+\begin{lemma}[Seeded plane factor]\label{lem:seeded}
+Let $F$ be a seeded rule and $0<\eps\leq1$. Run $\Phi_\eps$ from an initial configuration, possibly random, that is independent of the noise.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $F\circ F$ maps every configuration to the uniform configuration $(s_0,0)$.
+\item For $t\geq1$, each auxiliary symbol $y_t(v)$ is a function of $R_t(v)$ and $Y_t(v)$ alone. These symbols are independent with law $q_\eps$.
+\item Fix a height $z$. For $u\in\Z^d$ and $t\geq1$, let $G_t(u)=\langle V_t(u,z)\rangle$ if $R_t(u,z)=1$, and $G_t(u)=g_{J(W_{t-1}(u,z))}$ otherwise, where $W_{t-1}$ denotes the seed at time $t-1$. Then $b_t(u,z)=G_t(u)\bigl((b_{t-1}(u+n,z))_{n\in N}\bigr)$. The maps $G_t(u)$ with $u\in\Z^d$ and $t\geq2$ are independent with law $\Lambda_\eps$. For every $s\geq1$, those with $t>s$ are independent of the data $b_0(\cdot,z),\ldots,b_s(\cdot,z)$ of the plane. If the initial auxiliary symbols are independent with law $q_\eps$ and independent of the initial data, the same holds for $t\geq1$ and $s\geq0$.
+\item Let $\pi_{\rm nc}(\eps)$ be the sum of $\pi_i(\eps)$ over the indices $i$ for which $g_i$ is not constant, and put $\lambda(\eps)=|N|(1-\eps)\pi_{\rm nc}(\eps)$. Then
+\begin{equation}\label{eq:seed-lambda}
+ \lambda(\eps)\leq|N|\min\bigl(1-\eps,\ m\eps(1-1/S)\bigr).
+\end{equation}
+If $\lambda(\eps)<1$, then $\Phi_\eps$ has a unique stationary law $\mu$ and, for every finite $W\subset\Z^{d+1}$ and $n\geq1$,
+\begin{equation}\label{eq:seed-coupling}
+ \sup_x\dtv\bigl((\delta_x\Phi_\eps^{1+n})_W,\mu_W\bigr)\leq|W|\lambda(\eps)^n .
+\end{equation}
+In particular $\Phi_\eps$ is uniformly exponentially ergodic for $0<\eps<1/[|N|m(1-1/S)]$ and for $1-1/|N|<\eps\leq1$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) By \eqref{eq:seed-y}, every auxiliary symbol of $F(x)$ is zero. In the next update every seed is the zero word, which lies in the first bin, so \eqref{eq:seed-b} writes $s_0$ at every site. The uniform configuration $(s_0,0)$ is fixed by $F$.
+
+(ii) The deterministic update writes $0$ and a replacement writes $Y_t(v)$. Thus $y_t(v)=Y_t(v)$ if $R_t(v)=1$ and $y_t(v)=0$ otherwise, which has law $q_\eps$.
+
+(iii) The formula for $b_t$ is the data coordinate of the update. By (ii), for $t\geq2$ the map $G_t(u)$ is a function of $R_t(u,z)$ and $V_t(u,z)$ together with $R_{t-1}(u,z+j)$ and $Y_{t-1}(u,z+j)$ for $1\leq j\leq m$. For distinct pairs $(u,t)$ these sets of variables are disjoint: the first two lie at height $z$ and the others strictly above it, and they carry the indices $(u,t)$ and $(u,t-1)$ respectively. Hence the maps are independent. If $R_t(u,z)=1$ the map is $\langle V\rangle$ with $V$ uniform. If $R_t(u,z)=0$, the seed has law $q_\eps^{\otimes m}$ by (ii), so the map is $g_i$ with probability $\pi_i(\eps)$. This is the law $\Lambda_\eps$.
+
+The data of the plane up to time $s$ are functions of the initial configuration, of the variables $R_r(\cdot,z),V_r(\cdot,z)$ with $1\leq r\leq s$, and of the variables $R_r(\cdot,z'),Y_r(\cdot,z')$ with $z'>z$ and $1\leq r\leq s-1$, through the seeds at times $1,\ldots,s-1$. The maps $G_t$ with $t>s$ use only variables at height $z$ with times at least $s+1$, and variables above $z$ with times at least $s$. These sets of variables are disjoint, and the noise is independent of the initial configuration. Under the additional assumption on the initial auxiliary symbols, $G_1(u)$ is a function of $R_1(u,z)$, $V_1(u,z)$ and the initial seed $W_0(u,z)$, which has law $q_\eps^{\otimes m}$; the initial seeds lie strictly above the plane and are independent of all initial data, and the same argument applies.
+
+A replacement coin $R_{t-1}(u,z+j)$ also decides the data symbol at $(u,z+j)$, so different planes are correlated. The plane $z$ never reads the data of another plane, and this correlation does not affect (iii).
+
+(iv) Couple two initial configurations through common noise. By (ii), their auxiliary symbols agree at every time $t\geq1$. Suppose their data differ at $(u,z)$ at time $1+n$ with $n\geq1$. Then the map $G_{1+n}(u)$ of the plane $z$ is not constant, since a constant map writes the same symbol in both copies, and one of its $|N|$ inputs differs at time $n$. Repeating this, we obtain $w_{1+n}=u$ and $w_k\in w_{k+1}+N$ for $k=n,\ldots,1$ such that the maps $G_{k+1}(w_{k+1})$, $1\leq k\leq n$, are all nonconstant. There are at most $|N|^n$ such sequences. For a fixed sequence the $n$ maps involved have distinct times $k+1\geq2$; by (iii) they are independent, and each is nonconstant with probability $(1-\eps)\pi_{\rm nc}(\eps)$. The union bound gives probability at most $\lambda(\eps)^n$ for a data discrepancy at $(u,z)$ at time $1+n$. This bound does not depend on the two initial configurations and does not condition on their data. Summing over $W$ bounds the probability of a full-symbol discrepancy in $W$ by $|W|\lambda(\eps)^n$. The rest of the argument is that of \cref{thm:contraction}: a stationary law exists by compactness, coupling with it gives \eqref{eq:seed-coupling}, coupling two stationary laws gives uniqueness, and $c=-\log\lambda(\eps)$ with an enlarged prefactor gives \eqref{eq:uee}. If $\lambda(\eps)=0$, the two copies agree from time $2$.
+
+For \eqref{eq:seed-lambda}, $\pi_{\rm nc}(\eps)\leq1$. The zero word lies in the first bin and $g_1$ is constant, so
+\[
+ \pi_{\rm nc}(\eps)\leq1-\pi_1(\eps)\leq1-q_\eps(0)^m\leq m\bigl(1-q_\eps(0)\bigr)=m\eps(1-1/S).
+\]
+The two stated ranges make the right-hand side of \eqref{eq:seed-lambda} less than one.
+\end{proof}
+
+\subsection{A four-symbol rule}
+
+For $m\geq1$, let $E_m$ be the seeded rule on $\Z^2\times\Z$ with data alphabet $\{0,1\}$, $S=2$, $N=\{0,e_1,e_2\}$, the maps $g_1=\langle1\rangle$ and $g_2=\Maj$, and $J$ sending the zero word to $1$ and every other word to $2$. Its alphabet is $\{0,1\}^2$, and
+\begin{equation}\label{eq:four-symbol}
+ E_m(b,y)(u,z)=\begin{cases}
+ (1,0),& y(u,z+1)=\cdots=y(u,z+m)=0,\\
+ (M(u,z),0),&\text{otherwise,}
+ \end{cases}
+\end{equation}
+where $M(u,z)=\Maj(b(u,z),b(u+e_1,z),b(u+e_2,z))$.
+
+\begin{theorem}[Two steps suffice]\label{thm:two-step}
+Let $m=2^{51}$. The cellular automaton $E_m$ on $\Z^3$ has four symbols and neighbourhood radius $2^{51}$. The map $E_m\circ E_m$ sends every configuration to the uniform configuration $(1,0)$, and $E_m$ is not constant. For its uniform replacement perturbation at rate $\eps$, put
+\[
+ \rho_m(\eps)=\frac\eps2+(1-\eps)\Bigl(1-\frac\eps2\Bigr)^m .
+\]
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item For every $\eps\in[2^{-44},2^{-42}]$ there are two translation-invariant stationary laws $\mu^0_\eps,\mu^1_\eps$ satisfying, at every site $v\in\Z^3$,
+\[
+ \mu^0_\eps\{b(v)=1\}\leq96\rho_m(\eps)<2^{-35},\qquad
+ \mu^1_\eps\{b(v)=1\}\geq1-96\rho_m(\eps)>1-2^{-35}.
+\]
+\item The perturbation is uniformly exponentially ergodic for $0<\eps<1/(3\cdot2^{50})$ and for $2/3<\eps\leq1$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\Cref{lem:seeded}(i) gives $E_m\circ E_m\equiv(1,0)$. The rule is not constant: with all auxiliary symbols $1$ and all data $0$ it writes data $0$, while with all auxiliary symbols $0$ it writes data $1$. Its neighbourhood radius is $m$. Every one-site transition probability of the perturbation is at least $\eps/4$, so the noise is positive and has zero range.
+
+(i) Here $q_\eps(0)=1-\eps/2$, so the zero seed has probability $\pi_1(\eps)=(1-\eps/2)^m$. Fix $a\in\{0,1\}$, start from the configuration with every symbol equal to $(a,1)$, and fix a plane. At time $1$ every seed is the word $(1,\ldots,1)$, so each update is the majority unless it is replaced. It disagrees with the majority with probability $\eps/2$, independently over the sites. For $t\geq2$, by \cref{lem:seeded}(iii) and conditionally on the plane's past, the updates are independent. An update disagrees with the majority with probability $\eps/2+(1-\eps)\pi_1(\eps)=\rho_m(\eps)$ when the majority is $0$, through a replacement writing $1$ or a zero seed, and with probability $\eps/2$ when the majority is $1$, since only a replacement can write $0$. Each plane is therefore a $\rho_m(\eps)$-perturbation of north-east-centre majority, in the sense of \cref{thm:toom}, started from the constant $a$.
+
+For $\eps\in[2^{-44},2^{-42}]$ we have $\eps/2\leq2^{-43}$ and
+\[
+ \Bigl(1-\frac\eps2\Bigr)^m\leq\bigl(1-2^{-45}\bigr)^{2^{51}}\leq e^{-64}<2^{-64}.
+\]
+Hence $\rho_m(\eps)<2^{-43}+2^{-64}<2^{-42}<\tau$, using $32\cdot24^8<2^{42}$ from the proof of \cref{thm:coexistence}. \Cref{thm:toom} gives $\Prob\{b_t(v)\ne a\}\leq96\rho_m(\eps)$ at every site and time, and $96\cdot2^{-42}=3\cdot2^{-37}<2^{-35}$. As in the proof of \cref{thm:coexistence}, Ces\`aro limits of the two runs are stationary and translation invariant, the one-site bounds pass to the limits, and the two laws differ because $2^{-35}<1/2$.
+
+(ii) Only $g_2=\Maj$ is nonconstant and $|N|=3$. \Cref{lem:seeded}(iv) with $S=2$ gives uniform exponential ergodicity for $0<\eps<2/(3m)=1/(3\cdot2^{50})$ and for $2/3<\eps\leq1$.
+\end{proof}
+
+Since $1/(3\cdot2^{50})<2^{-44}$ and $2^{-42}<2/3$, the rule $E_{2^{51}}$ is ergodic, non-ergodic and ergodic again as the rate increases, like $F_{H_*}$ in \cref{cor:reentrance}. The rule $F_{H_*}$ has radius one and is nilpotent after $2^{88}+1$ steps; $E_{2^{51}}$ is nilpotent after two steps and has radius $2^{51}$. In this mechanism the radius must be large compared with $1/\eps$, since the zero seed has probability $(1-\eps/2)^m$ and writes $1$ whatever the majority. The plane process of $E_m$ errs toward $1$ more often than toward $0$, so it is not the symmetric noisy majority process. Exact bins remove this asymmetry.
+
+\subsection{The seed compiler}
+
+A \emph{binary PCA} $P$ on $\Z^d$ is given by a finite set $N\subset\Z^d$ and a function $p\colon\{0,1\}^N\to[0,1]$. Given $\sigma\in\{0,1\}^{\Z^d}$, the next configuration has independent sites, and the site $u$ takes the value $1$ with probability $p((\sigma(u+n))_{n\in N})$. Its transition probabilities are the numbers $p(x)$ and $1-p(x)$. It is \emph{attractive} if $p$ is nondecreasing for the coordinatewise order on $\{0,1\}^N$. Stationary laws, ergodicity and uniform exponential ergodicity are defined as in \cref{sec:rule}. Write $\mathbf a$ for the configuration with every symbol equal to $a$.
+
+\begin{lemma}[Exact seed partition]\label{lem:seed-partition}
+Let $S\geq3$, $w\geq1$, $m\geq1$ and $B\geq1$ be integers, put $D=w+S-1$, and let $q$ be the law on $\{0,\ldots,S-1\}$ with $q(0)=w/D$ and $q(s)=1/D$ for $s\neq0$. Let $d_1,\ldots,d_B$ be nonnegative integers with $\sum_id_i=D^m$ and $d_1\geq w^m$, and suppose
+\begin{equation}\label{eq:coin}
+ m(S-1)\geq B(w-1).
+\end{equation}
+Then $\{0,\ldots,S-1\}^m$ has a partition into sets $\mathcal W_1,\ldots,\mathcal W_B$ with $q^{\otimes m}(\mathcal W_i)=d_i/D^m$ for every $i$ and with the zero word in $\mathcal W_1$. The partition is computable from $S,w,m$ and $d_1,\ldots,d_B$.
+\end{lemma}
+
+\begin{proof}
+A word with exactly $k$ zero letters has probability $w^k/D^m$, and there are $C_k=\binom mk(S-1)^{m-k}$ such words. The binomial theorem gives $\sum_kC_kw^k=D^m$. It suffices to find nonnegative integers $c_{i,k}$, for $1\leq i\leq B$ and $0\leq k\leq m$, with
+\begin{equation}\label{eq:allocation}
+ \sum_ic_{i,k}=C_k,\qquad \sum_kc_{i,k}w^k=d_i,\qquad c_{i,m}=\ind_{\{i=1\}}.
+\end{equation}
+Then $\mathcal W_i$ takes $c_{i,k}$ of the words with $k$ zero letters, for instance consecutive ones in lexicographic order, and the zero word, the only word with $m$ zero letters, goes to $\mathcal W_1$.
+
+The ratio $C_{k+1}/C_k=(m-k)/[(k+1)(S-1)]$ decreases in $k$, so on $\{0,\ldots,m-1\}$ the minimum of $C_k$ is attained at an endpoint. Since $S-1\geq2$, $C_0=(S-1)^m\geq m(S-1)=C_{m-1}$. With \eqref{eq:coin},
+\begin{equation}\label{eq:Ck}
+ C_k\geq B(w-1)\qquad(0\leq k\leq m-1).
+\end{equation}
+
+Put $e^{(0)}_i=d_i-w^m\ind_{\{i=1\}}$. These are nonnegative integers with $\sum_ie^{(0)}_i=\sum_{l=0}^{m-1}C_lw^l$. Suppose that for some $0\leq k\leq m-2$ nonnegative integers $e^{(k)}_i$ satisfy
+\begin{equation}\label{eq:level}
+ \sum_ie^{(k)}_i=\sum_{l=k}^{m-1}C_lw^{l-k}.
+\end{equation}
+Let $\kappa_i\in\{0,\ldots,w-1\}$ be the remainder of $e^{(k)}_i$ modulo $w$. Then $\sum_i\kappa_i\leq B(w-1)\leq C_k$ by \eqref{eq:Ck}, and $\sum_i\kappa_i\equiv\sum_ie^{(k)}_i\equiv C_k$ modulo $w$ by \eqref{eq:level}. Hence $N_k=(C_k-\sum_i\kappa_i)/w$ is a nonnegative integer. Moreover
+\[
+ \sum_i\Bigl\lfloor\frac{e^{(k)}_i}{w}\Bigr\rfloor=\frac{\sum_ie^{(k)}_i-\sum_i\kappa_i}{w}
+ =N_k+\sum_{l=k+1}^{m-1}C_lw^{l-k-1}\geq N_k .
+\]
+Choose integers $0\leq t_i\leq\lfloor e^{(k)}_i/w\rfloor$ with $\sum_it_i=N_k$, for example by filling $i=1,2,\ldots$ in turn. Set $c_{i,k}=\kappa_i+wt_i$ and $e^{(k+1)}_i=\lfloor e^{(k)}_i/w\rfloor-t_i\geq0$. Then $\sum_ic_{i,k}=C_k$, $e^{(k)}_i=c_{i,k}+we^{(k+1)}_i$, and \eqref{eq:level} holds at $k+1$. At $k=m-1$ put $c_{i,m-1}=e^{(m-1)}_i$, whose sum is $C_{m-1}$ by \eqref{eq:level}. Finally put $c_{i,m}=\ind_{\{i=1\}}$. Unwinding $e^{(k)}_i=c_{i,k}+we^{(k+1)}_i$ gives $\sum_{k<m}c_{i,k}w^k=e^{(0)}_i$, which is \eqref{eq:allocation}. Every step is a finite computation with integers.
+\end{proof}
+
+The lemma only allocates the counts $c_{i,k}$; the bin of a given word is obtained from its number of zero letters and its lexicographic rank among the words with that number, so the local rule is specified without listing the $S^m$ words.
+
+\begin{lemma}[Monotone envelope]\label{lem:envelope}
+Let $P$ be an attractive binary PCA on $\Z^d$ and put
+\[
+ \Delta_s=\delta_{\mathbf1}P^s\{\sigma(0)=1\}-\delta_{\mathbf0}P^s\{\sigma(0)=1\}.
+\]
+Then $\Delta_s$ is nonincreasing, with a limit $\Delta_\infty\geq0$. The PCA is ergodic if and only if $\Delta_\infty=0$. If $\Delta_\infty>0$, it has two distinct translation-invariant stationary laws. If it is uniformly exponentially ergodic with constants $C,c$, then $\Delta_s\leq2Ce^{-cs}$.
+\end{lemma}
+
+\begin{proof}
+Realize all starts with common independent uniform variables $U_t(u)$ on $[0,1]$, setting $\sigma_t(u)=1$ exactly when $U_t(u)\leq p((\sigma_{t-1}(u+n))_{n\in N})$. Since $p$ is nondecreasing, this coupling preserves the coordinatewise order. The law after one step from $\mathbf1$ is carried by configurations below $\mathbf1$, so $\delta_{\mathbf1}P^{s+1}\{\sigma(0)=1\}\leq\delta_{\mathbf1}P^s\{\sigma(0)=1\}$; similarly the corresponding sequence from $\mathbf0$ is nondecreasing. By the order and translation invariance, $\Delta_s\geq0$ is the probability that the coupled runs from $\mathbf1$ and $\mathbf0$ differ at a given site.
+
+If $P$ is ergodic, both laws converge to its stationary law, so $\Delta_\infty=0$. Conversely, the run from any configuration lies between the runs from $\mathbf0$ and $\mathbf1$, so two runs differ at a given site at time $s$ with probability at most $\Delta_s$. If $\Delta_\infty=0$, the coupling argument in the proof of \cref{thm:contraction} gives a unique stationary law and convergence from every start.
+
+If $\Delta_\infty>0$, let $\bar\mu$ and $\underline\mu$ be weak limit points of the Ces\`aro averages of $\delta_{\mathbf1}P^s$ and $\delta_{\mathbf0}P^s$. They are stationary by the Feller argument of \cref{sec:rule} and translation invariant because the starts are. Their probabilities of $\{\sigma(0)=1\}$ are the limits of the two monotone sequences above, which differ by $\Delta_\infty$, so $\bar\mu\neq\underline\mu$. Finally, under \eqref{eq:uee} with $W=\{0\}$, $\Delta_s$ is at most the sum of the two one-site distances to the stationary law, hence at most $2Ce^{-cs}$.
+\end{proof}
+
+\begin{theorem}[Seed compiler]\label{thm:compiler}
+Fix $d\geq1$ and rationals $\rho$ and $\eps$ with $0<\eps<2\rho\leq1$. There is a total computable map $P\mapsto F_P$, defined on attractive binary PCA on $\Z^d$ whose transition probabilities are rational and lie in $[\rho,1-\rho]$, to seeded rules on $\Z^d\times\Z$, with the following properties. Write $\Phi_P$ for $F_P$ followed by uniform replacement at rate $\eps$.
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $F_P\circ F_P$ is constant, and $F_P$ is not.
+\item Every horizontal plane of $\Phi_P$ runs $P$ exactly: its data form a Markov chain with the transition of $P$ from time $1$, for every initial configuration, and from time $0$ if the initial auxiliary symbols are independent with law $q_\eps$ and independent of the initial data.
+\item $\Phi_P$ is ergodic if and only if $P$ is ergodic.
+\item $\Phi_P$ is uniformly exponentially ergodic if and only if $P$ is.
+\item $\Phi_P$ has two distinct translation-invariant stationary laws if and only if $P$ has.
+\end{enumerate}
+The rate $\eps$ and the dimension $d+1$ are fixed in advance; the alphabet and the radius of $F_P$ depend on $P$.
+\end{theorem}
+
+\begin{proof}
+\emph{Construction.} Let $P$ be given by $N$ and $p$, and put $a(x)=(p(x)-\eps/2)/(1-\eps)$. Since $\eps/2<\rho\leq p(x)\leq1-\rho<1-\eps/2$, every $a(x)$ is a rational number in $(0,1)$, and $a$ is nondecreasing. Let $a_1<\cdots<a_L$ be its distinct values and $j(x)$ the index with $a(x)=a_{j(x)}$. Put $B=L+1$,
+\[
+ r_1=a_1,\qquad r_i=a_i-a_{i-1}\ (2\leq i\leq L),\qquad r_B=1-a_L,\qquad
+ g_i(x)=\ind_{\{i\leq j(x)\}}\ (1\leq i\leq B).
+\]
+The $r_i$ are positive rationals with sum $1$, $g_1=\langle1\rangle$, $g_B=\langle0\rangle$, every $g_i$ is nondecreasing, and
+\begin{equation}\label{eq:threshold-sum}
+ \sum_{i=1}^Br_i\,g_i(x)=\sum_{i\leq j(x)}r_i=a(x).
+\end{equation}
+Write $\eps=\alpha/\beta$ with integers $1\leq\alpha<\beta$, let $K$ be the least common denominator of the $r_i$, and put $T=3K$,
+\[
+ S=\alpha T,\qquad w=(\beta-\alpha)T+1,\qquad D=\beta T=w+S-1.
+\]
+Since $1/D=\eps/S$, the law $q$ of \cref{lem:seed-partition} is the law $q_\eps$ of \eqref{eq:seed-q}. As $q_\eps(0)<1$, there is a least integer $m\geq1$ with $m(S-1)\geq B(w-1)$ and $q_\eps(0)^m\leq r_1$. The integers $d_i=r_iD^m$ satisfy the hypotheses of \cref{lem:seed-partition}, since $K$ divides $D$, and $d_1\geq w^m$ is the second condition on $m$. The lemma gives $J$ with $q_\eps^{\otimes m}(J^{-1}(i))=r_i$ and the zero word in the first bin. Let $F_P$ be the seeded rule with data alphabet $\{0,1\}$, neighbourhood $N$, maps $g_i$ and bin map $J$. Every step is a finite computation with rationals, so $P\mapsto F_P$ is total computable. Any other multiple $T$ of $K$ with $\alpha T\geq3$, and any $m$ satisfying the two conditions, give a rule with all the properties below; the choices above make the map single-valued.
+
+\emph{(i) and (ii).} \Cref{lem:seeded}(i) gives $F_P\circ F_P\equiv(1,0)$. The last bin is nonempty because $r_B>0$. A configuration whose seed at one site lies in it receives data $0$ there, since $g_B=\langle0\rangle$, while zero auxiliary symbols give data $1$; so $F_P$ is not constant. By construction $\pi_i(\eps)=r_i$. By \cref{lem:seeded}(iii) and \eqref{eq:threshold-sum}, conditionally on the past of a plane after time $1$, its updates are independent and take the value $1$ with probability $\eps/2+(1-\eps)a(x)=p(x)$, where $x$ is the input. This is (ii).
+
+\emph{From $P$ to $\Phi_P$.} Couple all initial configurations of $\Phi_P$ through common noise; their auxiliary symbols agree from time $1$. Let $\bar b$ and $\underline b$ be the data processes started at time $1$ from all ones and all zeros and driven by the same maps $G_t(u)$, $t\geq2$. Every map is a constant or some $g_i$, hence nondecreasing, so the data of every run lie between $\underline b_t$ and $\bar b_t$ at all times $t\geq1$. By \cref{lem:seeded}(iii), applied from time $1$, the plane $z$ of $\bar b_{1+s}$ has law $\delta_{\mathbf1}P^s$, and that of $\underline b_{1+s}$ has law $\delta_{\mathbf0}P^s$. Hence, for every finite $W\subset\Z^{d+1}$ and $s\geq0$,
+\begin{equation}\label{eq:compiler-bracket}
+ \sup_{x,x'}\Prob\bigl(X_{1+s}|_W\ne X'_{1+s}|_W\bigr)\leq|W|\Delta_s .
+\end{equation}
+If $P$ is ergodic, $\Delta_s\to0$ by \cref{lem:envelope}, and the coupling argument of \cref{thm:contraction} shows that $\Phi_P$ is ergodic. If $P$ is uniformly exponentially ergodic, \cref{lem:envelope} gives $\Delta_s\leq2Ce^{-cs}$, and the same argument gives \eqref{eq:uee} for $\Phi_P$ with the constants $\max(1,2Ce^c)$ and $c$.
+
+\emph{From $\Phi_P$ to $P$.} For $\sigma\in\{0,1\}^{\Z^d}$, let $\lambda_\sigma$ be the law with data $\sigma$ in every plane and independent auxiliary symbols with law $q_\eps$. By (ii), the data of plane $0$ under $\lambda_\sigma\Phi_P^t$ have law $\delta_\sigma P^t$. Suppose that $\Phi_P$ is ergodic with stationary law $\mu$, and let $\nu$ be the law of the data of plane $0$ under $\mu$. For a continuous function $f$ of these data, dominated convergence gives
+\[
+ (\delta_\sigma P^t)(f)=\int(\delta_x\Phi_P^t)(f)\,\lambda_\sigma(dx)\to\mu(f)=\nu(f).
+\]
+Thus every run of $P$ converges to $\nu$, which is stationary because $P$ is Feller. If $\nu'$ is stationary for $P$, the same computation with $\sigma$ drawn from $\nu'$ shows that $\nu'=\nu'P^t$ converges to $\nu$, so $\nu'=\nu$. Hence $P$ is ergodic. If $\Phi_P$ is uniformly exponentially ergodic, joint convexity of the total variation distance gives, for finite $W\subset\Z^d$,
+\[
+ \dtv\bigl((\delta_\sigma P^t)_W,\nu_W\bigr)
+ \leq\int\dtv\bigl((\delta_x\Phi_P^t)_{W\times\{0\}},\mu_{W\times\{0\}}\bigr)\lambda_\sigma(dx)
+ \leq C|W|e^{-ct},
+\]
+so $P$ is uniformly exponentially ergodic. This proves (iii) and (iv).
+
+\emph{(v).} Let $\nu$ be a translation-invariant stationary law of $P$. Start $\Phi_P$ with independent copies of $\nu$ in the planes and with independent auxiliary symbols of law $q_\eps$, independent of the data. This initial law is translation invariant on $\Z^{d+1}$. By (ii), each plane runs $P$ from $\nu$, so its data have law $\nu$ at every time. Every weak limit point of the Ces\`aro averages is stationary and translation invariant, and its data in each plane have law $\nu$. Two distinct translation-invariant stationary laws of $P$ therefore give two distinct ones of $\Phi_P$. Conversely, if $\Phi_P$ has two distinct stationary laws, it is not ergodic; then $P$ is not ergodic by (iii), and \cref{lem:envelope} gives two distinct translation-invariant stationary laws of $P$.
+\end{proof}
+
+\begin{remark}[What uses attractiveness]\label{rem:compiler-scope}
+Attractiveness is used in the passage from $P$ to $\Phi_P$ in (iii) and (iv), and in the converse direction of (v), through \cref{lem:envelope}. The construction, (ii), the passage from $\Phi_P$ to $P$ in (iii) and (iv), and the lift of translation-invariant stationary laws from $P$ to $\Phi_P$ in (v) hold for every binary PCA with rational transition probabilities in $(\eps/2,1-\eps/2)$, with the maps $g_i$ defined from the order of the values of $a$ as above. For a non-attractive PCA, ergodicity of every plane need not give ergodicity of the whole system, since the planes read overlapping seeds; our argument does not establish the remaining directions for non-attractive PCA. Representing a PCA by independent random local maps is standard. What the compiler adds is that this randomness is read from the replacement noise of a deterministic rule at one fixed rate, with exact rational bins, and that the rule is nilpotent in two steps.
+\end{remark}
+
+\subsection{Noisy majority and the halting family}
+
+For $0<\delta<1$, let $T_\delta$ be noisy north-east-centre majority on $\Z^2$, the binary PCA with
+\[
+ p(x)=(1-\delta)\Maj(x_0,x_{e_1},x_{e_2})+\delta/2 .
+\]
+It is attractive, and its transition probabilities lie in $[\delta/2,1-\delta/2]$.
+
+\begin{corollary}[Compiled noisy majority]\label{cor:compiled-toom}
+Let $\delta=2^{-42}$, $\eps=2^{-43}$ and $r=1/(2^{44}-2)$. Compiling $T_\delta$ at rate $\eps$ as in the proof of \cref{thm:compiler}, with $T=2^{44}-2$ and $m=2^{50}$, gives a cellular automaton $F$ on $\Z^3$ with $2^{45}-4$ symbols and neighbourhood radius $2^{50}$, such that $F\circ F$ is constant. Its data update writes $1$, the majority of the three inputs in the plane, or $0$, according as the seed lies in one of three bins of probabilities $r$, $1-2r$ and $r$ under $q_\eps^{\otimes m}$. Under uniform replacement at rate $\eps$:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item every horizontal plane runs $T_\delta$ exactly from time $1$ for every initial configuration, and from time $0$ if the initial auxiliary symbols are independent with law $q_\eps$ and independent of the initial data; and there are two translation-invariant stationary laws $\mu^0,\mu^1$ with $\mu^0\{b(v)=1\}\leq96\cdot2^{-43}<2^{-36}$ and $\mu^1\{b(v)=1\}\geq1-2^{-36}$ at every site $v$;
+\item the perturbation is non-ergodic at every rate in an open interval containing $\eps$, and uniformly exponentially ergodic at every rate in $(0,1/(3\cdot2^{50}))$ and in $(2/3,1]$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+Here $\eps<\delta$, so \cref{thm:compiler} applies with $\rho=\delta/2$. The function $a=(p-\eps/2)/(1-\eps)$ takes the two values
+\[
+ a_1=\frac{2^{-43}-2^{-44}}{1-2^{-43}}=\frac{1}{2^{44}-2}=r,\qquad a_2=1-r,
+\]
+so $B=3$, the bin probabilities are $r$, $1-2r$ and $r$, and $g_1=\langle1\rangle$, $g_2=\Maj$, $g_3=\langle0\rangle$. Since $1-2r=(2^{43}-2)/(2^{43}-1)$, the least common denominator is $K=2^{44}-2$, and we take $T=K$. With $\alpha=1$ and $\beta=2^{43}$,
+\[
+ S=2^{44}-2,\qquad w=(2^{43}-1)(2^{44}-2)+1,\qquad D=2^{43}(2^{44}-2),
+\]
+and the alphabet $\{0,1\}\times\{0,\ldots,S-1\}$ has $2S=2^{45}-4$ symbols. Condition \eqref{eq:coin} holds: $m(S-1)=2^{50}(2^{44}-3)>2^{93}$, while $B(w-1)=3(2^{43}-1)(2^{44}-2)<3\cdot2^{87}<2^{89}$. The zero word fits in the first bin: $1-q_\eps(0)=\eps(1-1/S)\geq2^{-44}$, so $q_\eps(0)^m\leq\exp(-2^{50}\cdot2^{-44})=e^{-64}<2^{-64}<r$. Thus $T=K$ and $m=2^{50}$ are admissible in the construction. \Cref{thm:compiler}(i) gives $F\circ F\equiv(1,0)$, and (ii) gives the exact planes; directly, $\eps/2+(1-\eps)r=2^{-44}+2^{-44}=2^{-43}=\delta/2$, because $(1-\eps)r=2^{-44}$.
+
+(i) Start from data $\mathbf a$ in every plane and independent auxiliary symbols with law $q_\eps$. Each plane runs $T_\delta$ from $\mathbf a$, which is a $2^{-43}$-perturbation of north-east-centre majority in the sense of \cref{thm:toom}. As $2^{-43}<\tau$, the bound $96\cdot2^{-43}=3\cdot2^{-38}<2^{-36}$ holds at every site and time, and the Ces\`aro argument of \cref{thm:coexistence} gives the two laws.
+
+(ii) At a rate $\eps'$, \cref{lem:seeded}(iii) shows that each plane, started from data $\mathbf a$ and independent auxiliary symbols with law $q_{\eps'}$, is a binary PCA whose updates disagree with the majority with probability $\eps'/2+(1-\eps')\pi_1(\eps')$ when the majority is $0$ and $\eps'/2+(1-\eps')\pi_3(\eps')$ when it is $1$. Each $\pi_i(\eps')$ is a finite sum of products of the affine functions $q_{\eps'}(s)$ of $\eps'$, hence continuous. At $\eps'=\eps$ both error probabilities equal $2^{-43}<\tau$. They therefore stay below $\tau$ on an open interval of rates containing $\eps$, and the argument of (i) gives two translation-invariant stationary laws there. Finally, \cref{lem:seeded}(iv) with $|N|=3$ gives uniform exponential ergodicity for $0<\eps'<1/[3\cdot2^{50}(1-1/S)]$, a range containing $(0,1/(3\cdot2^{50}))$, and for $2/3<\eps'\leq1$.
+\end{proof}
+
+The four-symbol rule of \cref{thm:two-step} reaches the same conclusion with a far smaller alphabet. The compiled rule has the additional property that each of its planes is exactly the symmetric noisy majority process $T_{2^{-42}}$ from time $1$.
+
+\begin{remark}[A two-step halting family]\label{rem:two-step-halting}
+The compiler also accepts a prescribed rational law of local maps, provided it gives positive weight to a constant map. Let $F_M$ be the quorum rule of \cref{sec:nu-undecidable}, with local rule $f_M$ on the alphabet $\mathcal B_M$ of $k_M$ symbols, and put $\eps_c=\eps_0/2$ with $\eps_0=490000^{-99}$. Uniform replacement at rate $\eps_0$ after $F_M$ applies, independently at each site, the map $f_M$ with probability $1-\eps_0$ and a uniform constant map otherwise. Its law of maps is
+\[
+ \frac{\eps_c}{k_M}\sum_{s\in\mathcal B_M}\delta_{\langle s\rangle}
+ +(1-\eps_c)\Bigl(\frac{1-\eps_0}{1-\eps_c}\,\delta_{f_M}
+ +\frac{\eps_0-\eps_c}{(1-\eps_c)k_M}\sum_{s\in\mathcal B_M}\delta_{\langle s\rangle}\Bigr),
+\]
+and the law in parentheses is rational with positive weights summing to one. Apply \cref{lem:seed-partition}, with parameters chosen as in the proof of \cref{thm:compiler}, with one bin for $f_M$ and one bin for each constant $\langle s\rangle$, the zero word in the bin of $\langle\bot\rangle$, and seeds of length $m_M$ in the ninth coordinate. This gives a seeded rule $G_M$ on $\Z^9$, computable from $M$, with $G_M\circ G_M$ constant. By \cref{lem:seeded}(iii), uniform replacement at the single rate $\eps_c$ drives every plane by independent maps with exactly the displayed law, that is, by $F_M$ under uniform replacement at rate $\eps_0$. Retain the $f_M$-bin label separately from the constant-bin labels, even if their maps coincide. Designate a point faulty when it is physically replaced or, without physical replacement, its seed selects one of the constant-bin labels. In each plane, after the one-step burn-in, these fault indicators are independent with probability $\eps_0$. Hence \eqref{eq:nu-joint} holds with $\gamma=\eps_0$. The proof of \cref{thm:nu-main} then applies with a burn-in of one step in place of $H_0$, and with independent auxiliary symbols of law $q_{\eps_c}$ in place of stationary fuels: the auxiliary symbols of all runs agree from time $1$, and the future maps of a plane are independent of its data at time $1$. If $M$ halts, the perturbation is uniformly exponentially ergodic; if not, it has two translation-invariant stationary laws. So ergodicity at the single rate $\eps_c$ is undecidable even for rules that are nilpotent in two steps.
+
+This does not improve Theorem~C, and the two results are incomparable. The rule $G_M$ is nilpotent in two steps rather than $H_0+1$, but it is classified at one rate rather than on the interval $I_0$, and its radius is not one. Its seed length $m_M$ grows with $M$, as its alphabet does. The zero word has probability $q_{\eps_c}(0)^{m_M}$ and must lie in the bin of $\langle\bot\rangle$, whose probability $(\eps_0-\eps_c)/[(1-\eps_c)k_M]$ tends to zero as $k_M$ grows; the construction also needs $m_M(S-1)\geq(k_M+1)(w-1)$, which forces $m_M$ to be about $(k_M+1)/\eps_c$. Theorem~C keeps radius one, one neighbourhood for every $M$, and the whole interval $I_0$.
+\end{remark}
+
 \section{How this work was done}
 
 \paragraph{AI note.}
@@ -652,7 +938,12 @@ The authors chose the question, directed the work and judged every result. AI mo
 
 Version~1.1.0 adds \cref{sec:nu-undecidable,sec:nu-many-windows}. OpenAI's GPT-6.1~Sol derived them, and separate agents of the same model family audited the lift, the imported interface and the window construction refutation-first. Anthropic's Claude Opus~5.5 then checked both sections refutation-first, as a review from the other developer. It found no error in the mathematics and suggested presentational changes, which this version makes; a separate run of Claude Opus~5.5 integrated the sections and those changes into the manuscript.
 
-Models are not listed as authors; the authors take responsibility for every claim. The proofs of the countdown reduction, coupling bound, separated-event construction, countdown lift and window construction are given in full, and none of them uses a computation. The majority-stability estimate is imported from \cite{Gacs21}; its specialization and constants are stated in \cref{thm:toom}. \Cref{sec:nu-undecidable} also imports the machine-to-tiling compiler, the three-token theorem and the Common local maps lemma of \cite{DM26A}; the proof of the three-token theorem there includes one finite lemma that is checked by computer \cite[Lemma~9.12]{DM26A}.
+Version~1.2.0 adds \cref{sec:two-step}. OpenAI's GPT-6.1~Sol derived the seed partition of \cref{lem:seed-partition}, the seed compiler of \cref{thm:compiler} and the two-step halting family of \cref{rem:two-step-halting}. Separate agents of the same model family audited them, and two independently written programs checked the integer allocation of \cref{lem:seed-partition} by exact arithmetic. Anthropic's Claude Opus~5.5 then checked these results refutation-first, as a review from the other developer. It re-derived the identities by hand, found no error, observed that the halting family is incomparable with Theorem~C rather than an improvement of it, noted that one deterministic step cannot suffice (\cref{prop:one-step}), and worked out the application of the compiler to noisy majority (\cref{cor:compiled-toom}). A separate run of Claude Opus~5.5 wrote \cref{sec:two-step}: it derived the four-symbol rule of \cref{thm:two-step}, the explicit constants of \cref{cor:compiled-toom}, the ergodic ranges of \cref{lem:seeded,thm:two-step,cor:compiled-toom}, and the proofs as written, and integrated them into the manuscript. A separate run of OpenAI's GPT-6.1~Sol then checked \cref{sec:two-step} refutation-first; it found no error in its results, and its four corrections of statement are made here.
+
+Models are not listed as authors; the authors take responsibility for every claim. The proofs of the countdown reduction, coupling bound, separated-event construction, countdown lift, window construction, seed partition, seed compiler and two-step rules are given in full, and none of them uses a computation. The majority-stability estimate is imported from \cite{Gacs21}; its specialization and constants are stated in \cref{thm:toom}. \Cref{sec:nu-undecidable} and \cref{rem:two-step-halting} also import the machine-to-tiling compiler, the three-token theorem and the Common local maps lemma of \cite{DM26A}; the proof of the three-token theorem there includes one finite lemma that is checked by computer \cite[Lemma~9.12]{DM26A}.
+
+\paragraph{Verification status.}
+\Cref{sec:rule,sec:clocks,sec:memory,sec:ergodicity,sec:nu-undecidable,sec:nu-many-windows,sec:deterministic} were checked as described above. In \cref{sec:two-step}, \cref{lem:seed-partition}, \cref{thm:compiler} and \cref{rem:two-step-halting} were checked by models of both developers. The reviewer also ran the allocation of \cref{lem:seed-partition} by exact arithmetic, enumerating every seed word on small instances, and every bin received exactly its target mass; like the two programs above, these runs are checks and are used in no proof. \Cref{thm:two-step}, the constants of \cref{cor:compiled-toom} and the ergodic ranges in \cref{sec:two-step} were derived while this version was prepared, and were then checked refutation-first, with independently written programs, by OpenAI's GPT-6.1~Sol as a review from the other developer. That review found no error in the results and four points of statement, which this version corrects.
 
 \begin{thebibliography}{9}\raggedright
 \bibitem{Gacs21}
