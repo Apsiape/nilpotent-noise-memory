@@ -1,6 +1,6 @@
 # A nilpotent cellular automaton that remembers under noise
 
-Seth Douglas and Nidhal Mghirbi. Version 1.1.0, November 2026. The version 1.1.0 DOI is recorded in the commit that follows the release. Version 1.0.0: [10.5281/zenodo.24101507](https://doi.org/10.5281/zenodo.24101507). Concept DOI (all versions): [10.5281/zenodo.24101506](https://doi.org/10.5281/zenodo.24101506).
+Seth Douglas and Nidhal Mghirbi. Version 1.1.0, November 2026. DOI: [10.5281/zenodo.24117111](https://doi.org/10.5281/zenodo.24117111). Version 1.0.0: [10.5281/zenodo.24101507](https://doi.org/10.5281/zenodo.24101507). Concept DOI (all versions): [10.5281/zenodo.24101506](https://doi.org/10.5281/zenodo.24101506).
 
 **This is a preprint. It has not been peer reviewed.**
 
